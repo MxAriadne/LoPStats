@@ -14,6 +14,7 @@ const boss_upgrade = [1, 1.22, 1.44, 1.66, 1.88, 2.1];
 
 // Handle scaling values = [Weapon Motivity/Technique, Weapon Advance, Arm Motivity/Technique, Arm Advance]
 const scaling = [
+    [0],
     [0.511, 0.513, 0.6319, 0.6366],   // D
     [0.8176, 0.8207, 1.0111, 1.0186], // C
     [1.0834, 1.0875, 1.3397, 1.3597], // B
@@ -22,7 +23,7 @@ const scaling = [
 ];
 
 // active
-$(document).ready(function () {
+$(function() {
     // Attach modify events to handleUpdates()
     $('#handle-list, #crank-list, #reinf-list').change(handleUpdates);
     $('#motivity, #technique, #advance').on('input', handleUpdates);
@@ -38,12 +39,12 @@ $(document).ready(function () {
 
     //Trigger first call
     handleUpdates()
-
 })
 
 function handleUpdates() {
     let table = document.getElementById("table")
-    const rows = table.getElementsByTagName('tr');
+    let rows = table.getElementsByTagName('tr');
+
     for (let i = rows.length - 1; i > 0; i--) {
         table.deleteRow(i);
     }
@@ -54,6 +55,28 @@ function handleUpdates() {
     //Calc crank if selected
     let handleScaling = applyCrank(handle, document.getElementById("crank-list").selectedIndex);
 
+    let letters = ['-', 'D', 'C', 'B', 'A', 'S']
+    document.getElementById("s_table").insertAdjacentHTML("beforeend",
+        "<tr>" +
+             "<td>" +
+             letters[handleScaling[0] === null ? 0 : handleScaling[0]+1] +
+             "</td>" +
+             "<td>" +
+             letters[handleScaling[1] === null ? 0 : handleScaling[1]+1] +
+             "</td>" +
+             "<td>" +
+             letters[handleScaling[2] === null ? 0 : handleScaling[2]+1] +
+             "</td>" +
+             "<tr>")
+
+    try {
+        if ($(this).val() != null && $(this).val() > 100) {
+            $(this).val(100)
+        }
+    } catch (e) {
+        console.log(e)
+    }
+
     let m = parseInt($('#motivity').val());
     let t = parseInt($('#technique').val());
     let a = parseInt($('#advance').val());
@@ -62,6 +85,8 @@ function handleUpdates() {
     let m_scaling = handleScaling[0] === null ? 0 : scaling[handleScaling[0]][0];
     let t_scaling = handleScaling[1] === null ? 0 : scaling[handleScaling[1]][0];
     let a_scaling = handleScaling[2] === null ? 0 : scaling[handleScaling[2]][1];
+
+    $('#table').append("<tbody>")
 
     //Iterate over the blades and calc damage
     for (blade in blades) {
@@ -78,7 +103,7 @@ function handleUpdates() {
             blitz_ar = Math.floor((weapon.elemATK[0] * upgrade) + (weapon.elemATK[0] * (weapon_adv[a-1])));
             fire_ar  = Math.floor((weapon.elemATK[1] * upgrade) + (weapon.elemATK[1] * (weapon_adv[a-1])));
             acid_ar  = Math.floor((weapon.elemATK[2] * upgrade) + (weapon.elemATK[2] * (weapon_adv[a-1])));
-            phys_ar  = Math.floor((weapon.physATK * upgrade) + (weapon.physATK * (weapon_phys[m-1] * m_scaling + weapon_phys[t-1] * t_scaling)));
+            phys_ar  = Math.floor((weapon.physATK) + (weapon.physATK * (weapon_phys[m-1] * m_scaling + weapon_phys[t-1] * t_scaling)));
             ar       = blitz_ar + fire_ar + acid_ar + phys_ar;
             lar      = Math.floor(ar * handle.light_mult);
             har      = Math.floor(ar * handle.heavy_mult);
@@ -97,6 +122,8 @@ function handleUpdates() {
                 '</tr>');
         }
     }
+    $('#table').append("</tbody>")
+    Sortable.init()
 }
 
 function applyCrank(handle, index) {
@@ -108,20 +135,12 @@ function applyCrank(handle, index) {
         //motivity crank
         case 1:
             scaling[0] = handle.scaling[0] + 1;
-            if (handle.scaling[1] === 0) {
-                scaling[1] = 4;
-            } else {
-                scaling[1] = handle.scaling[1] - 1;
-            }
+            scaling[1] = handle.scaling[1] === null ? 0 : handle.scaling[1] - 1;
             scaling[2] = handle.scaling[2]
             break;
         //technique crank
         case 2:
-            if (handle.scaling[0] === 0) {
-                scaling[0] = 4;
-            } else {
-                scaling[0] = handle.scaling[0] - 1;
-            }
+            scaling[0] = handle.scaling[0] === null ? 0 : handle.scaling[0] - 1;
             scaling[1] = handle.scaling[1] + 1;
             scaling[2] = handle.scaling[2]
             break;
@@ -129,7 +148,8 @@ function applyCrank(handle, index) {
         case 3:
             scaling[0] = handle.scaling[0];
             scaling[1] = handle.scaling[1];
-            scaling[2] = handle.scaling[2] + 1;
+            scaling[2] = handle.scaling[2] === null ? 0 : handle.scaling[2] + 1;
+            console.log(scaling[2])
             break;
         default:
             return handle.scaling;

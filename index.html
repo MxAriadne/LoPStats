@@ -1,63 +1,112 @@
 <HTML lang="en">
 <head>
     <title>Lies Of P AR Calculator</title>
-    <script src="sorttable.js"></script>
-    <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="helper.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="blades.js"></script>
     <script type="text/javascript" src="handles.js"></script>
     <script type="text/javascript" src="unique.js"></script>
+    <script type="text/javascript" src="helper.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/sortable-theme-minimal.css">
+    <script type="text/javascript" src="assets/sortable.min.js"></script>
+
 </head>
 
-<label for="motivity">Motivity: </label>
-<input id="motivity" value="5">
-<label for="technique">Technique: </label>
-<input id="technique" value="5">
-<label for="advance">Advance: </label>
-<input id="advance" value="6">
-<br>
-<label for="handle-list">Choose a handle</label>
-<select id="handle-list">
-    <option value="acidic_crystal_spear">Acidic Crystal Spear</option>
-</select>
+<div class="left">
+    <div class="form-group">
+        <label for="motivity" class="col-sm-2">
+            <span class="h6 medium text-muted pt-1 pl-2 pr-2">Motivity</span>
+        </label>
+        <input type="text" class="form-control mt-n3" id="motivity" value="5" min="5" max="100">
+        <br>
+        <label for="technique" class="col-sm-2">
+            <span class="h6 medium text-muted pt-1 pl-2 pr-2">Technique</span>
+        </label>
+        <input type="text" class="form-control mt-n3" id="technique" value="5" min="5" max="100">
+        <br>
+        <label for="advance" class="col-sm-2">
+            <span class="h6 medium text-muted pt-1 pl-2 pr-2">Advance</span>
+        </label>
+        <input type="text" class="form-control mt-n3" id="advance" value="6" min="6" max="100">
+    </div>
+    <br>
+    <label for="handle-list">Choose a handle</label>
+    <select id="handle-list">
+        <option value="acidic_crystal_spear">Acidic Crystal Spear</option>
+    </select>
+    <br>
+    <label for="crank-list">Choose a crank</label>
+    <select id="crank-list">
+        <option value="none">None</option>
+        <option value="m-crank">Motivity Crank</option>
+        <option value="t-crank">Technique Crank</option>
+        <option value="a-crank">Advance Crank</option>
+    </select>
+    <br>
+    <label for="reinf-list">Reinforcement Level</label>
+    <select id="reinf-list">
+        <option value="0">+0 Moonstone / +0 Moonstone of the Covenant</option>
+        <option value="1">+1 Moonstone / +1 Moonstone of the Covenant</option>
+        <option value="2">+2 Moonstone / +2 Moonstone of the Covenant</option>
+        <option value="3">+3 Moonstone / +3 Moonstone of the Covenant</option>
+        <option value="4">+4 Moonstone / +4 Moonstone of the Covenant</option>
+        <option value="5">+5 Moonstone / +5 Moonstone of the Covenant</option>
+        <option value="6">+6 Moonstone / +5 Moonstone of the Covenant</option>
+        <option value="7">+7 Moonstone / +5 Moonstone of the Covenant</option>
+        <option value="8">+8 Moonstone / +5 Moonstone of the Covenant</option>
+        <option value="9">+9 Moonstone / +5 Moonstone of the Covenant</option>
+        <option value="10">+10 Moonstone / +5 Moonstone of the Covenant</option>
+    </select>
 
-<label for="crank-list">Choose a crank</label>
-<select id="crank-list">
-    <option value="none">None</option>
-    <option value="m-crank">Motivity Crank</option>
-    <option value="t-crank">Technique Crank</option>
-    <option value="a-crank">Advance Crank</option>
-</select>
+    <table id="s_table">
+        <tr>
+            <th>Motivity Scaling</th>
+            <th>Technique Scaling</th>
+            <th>Advance Scaling</th>
+        </tr>
+    </table>
+</div>
 
-<label for="reinf-list">Reinforcement Level</label>
-<select id="reinf-list">
-    <option value="0">+0 Moonstone / +0 Moonstone of the Covenant</option>
-    <option value="1">+1 Moonstone / +1 Moonstone of the Covenant</option>
-    <option value="2">+2 Moonstone / +2 Moonstone of the Covenant</option>
-    <option value="3">+3 Moonstone / +3 Moonstone of the Covenant</option>
-    <option value="4">+4 Moonstone / +4 Moonstone of the Covenant</option>
-    <option value="5">+5 Moonstone / +5 Moonstone of the Covenant</option>
-    <option value="6">+6 Moonstone / +5 Moonstone of the Covenant</option>
-    <option value="7">+7 Moonstone / +5 Moonstone of the Covenant</option>
-    <option value="8">+8 Moonstone / +5 Moonstone of the Covenant</option>
-    <option value="9">+9 Moonstone / +5 Moonstone of the Covenant</option>
-    <option value="10">+10 Moonstone / +5 Moonstone of the Covenant</option>
-
-</select>
-
-<table class="sortable" id="table">
-    <tr>
-        <th>Weapon</th>
-        <th class="sorttable_numeric">Physical Damage</th>
-        <th class="sorttable_numeric">Shock Damage</th>
-        <th class="sorttable_numeric">Fire Damage</th>
-        <th class="sorttable_numeric">Acid Damage</th>
-        <th class="sorttable_numeric">Total Damage</th>
-        <th class="sorttable_numeric">Light AR</th>
-        <th class="sorttable_numeric">Heavy AR</th>
-        <th class="sorttable_numeric">Charged AR</th>
-    </tr>
-</table>
+<div class="right">
+    <table class="sortable-theme-minimal" data-sortable id="table">
+        <thead>
+            <tr>
+                <th data-sortable="true">Weapon</th>
+                <th>Physical Damage</th>
+                <th>
+                    <div class="layout">
+                        <img class="image" alt="Blitz Damage" width="32px" height="32px" src="assets/blitz.webp">
+                        <div class="overlay">Blitz Damage</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="layout">
+                        <img class="image" alt="Fire Damage" width="32px" height="32px" src="assets/fire.webp">
+                        <div class="overlay">Fire Damage</div>
+                    </div>
+                </th>
+                <th>
+                    <div class="layout">
+                        <img class="image" alt="Acid Damage" width="32px" height="32px" src="assets/acid.webp">
+                        <div class="overlay">Acid Damage</div>
+                    </div>
+                </th>
+                <th>Total Damage</th>
+                <th>Light AR</th>
+                <th>Heavy AR</th>
+                <th>Charged AR</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
 </HTML>

@@ -40,6 +40,25 @@ option {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
+.nav-link {
+    color: antiquewhite;
+    border: none;
+    padding: 12px;
+    margin: 2px;
+    box-shadow: none;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* More specific selector */
+ul.nav.nav-pills .nav-link.active {
+    color: antiquewhite;
+    border: none;
+    padding: 12px;
+    margin: 2px;
+    box-shadow: none;
+    background-color: rgba(110, 0, 0, 0.8)
+}
+
 label {
     margin: 0;
     color: antiquewhite;

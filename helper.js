@@ -22,7 +22,10 @@ $(function() {
 function main(category) {
     switch (category) {
         case 0:
-            $('#handle-list, #crank-list, #reinf-list').change(handleStandard);
+            $('#handle-list, #crank-list, #reinf-list').change(function(){
+                clearTable()
+                handleStandard()
+            });
             $('#motivity, #technique, #advance').on('input', handleStandard);
             handleStandard();
             break;
@@ -42,6 +45,12 @@ function main(category) {
 function clearTable() {
     let table = document.getElementById("table")
     let rows = table.getElementsByTagName('tr');
+    for (let i = rows.length - 1; i > 0; i--) {
+        table.deleteRow(i);
+    }
+
+    table = document.getElementById("s_table")
+    rows = table.getElementsByTagName('tr');
     for (let i = rows.length - 1; i > 0; i--) {
         table.deleteRow(i);
     }
@@ -92,12 +101,15 @@ function calcDamage(base_dmg, dmg_scaling, type, upgrade) {
                                                             (arm_phys[t] * scaling[dmg_scaling[1]][2]) +
                                                             (arm_adv[a] * scaling[dmg_scaling[2]][3]))));
             break;
+        case 2:
+            result  = Math.floor((base_dmg * upgrade) + (base_dmg * ((weapon_adv[a] * scaling[dmg_scaling[2]][1]))));
+            break;
     }
     return result
 }
 
 function handleStandard() {
-    toggleElements(['#handle-list', '#handle-label', '#crank-list', '#crank-label', '#reinf-list', '#reinf-label'], true);
+    toggleElements(['#handle-list', '#handle-label', '#crank-list', '#crank-label', '#reinf-list', '#reinf-label', '#s_table'], true);
     clearTable()
 
     let r = parseInt($('#reinf-list').val());
@@ -106,6 +118,12 @@ function handleStandard() {
     let handle = handles[h];
     let handleScaling = applyCrank(handle.scaling, document.getElementById("crank-list").selectedIndex);
 
+    $('#s_table').append('<tr>' +
+        '<td>' + letters[handleScaling[0]] + '</td>' +
+        '<td>' + letters[handleScaling[1]] + '</td>' +
+        '<td>' + letters[handleScaling[2]] + '</td>' +
+        '</tr>');
+
     //Iterate over the blades and calc damage
     for (blade in blades) {
         if (blades.hasOwnProperty(blade)) {
@@ -113,15 +131,15 @@ function handleStandard() {
 
             let upgrade = weapon.reinforcements === undefined ? standard_weapon_reinforcements[r] : weapon.reinforcements[r];
 
-            let blitz_ar = calcDamage(weapon.elemATK[0], handleScaling, 0, upgrade);
-            let fire_ar  = calcDamage(weapon.elemATK[1], handleScaling, 0, upgrade);
-            let acid_ar  = calcDamage(weapon.elemATK[2], handleScaling, 0, upgrade);
+            let blitz_ar = calcDamage(weapon.elemATK[0], handleScaling, 2, upgrade);
+            let fire_ar  = calcDamage(weapon.elemATK[1], handleScaling, 2, upgrade);
+            let acid_ar  = calcDamage(weapon.elemATK[2], handleScaling, 2, upgrade);
             let phys_ar  = calcDamage(weapon.physATK, handleScaling, 0, upgrade);
 
-            let total_ar       = blitz_ar + fire_ar + acid_ar + phys_ar;
-            let l_ar      = Math.floor(total_ar * handle.light_mult);
-            let h_ar      = Math.floor(total_ar * handle.heavy_mult);
-            let ch_h_ar    = Math.floor(total_ar * handle.ch_heavy_mult);
+            let total_ar = blitz_ar + fire_ar + acid_ar + phys_ar;
+            let l_ar     = Math.floor(total_ar * handle.light_mult);
+            let h_ar     = Math.floor(total_ar * handle.heavy_mult);
+            let ch_h_ar  = Math.floor(total_ar * handle.ch_heavy_mult);
 
             $('#table').append('<tr>' +
                 '<td>' + weapon.name + '</td>' +
@@ -141,10 +159,10 @@ function handleStandard() {
 }
 
 function handleUnique() {
-    toggleElements(['#handle-list', '#handle-label'], false);
+    toggleElements(['#handle-list', '#handle-label', '#s_table'], false);
     toggleElements(['#crank-list', '#crank-label', '#reinf-list', '#reinf-label'], true);
-
     clearTable()
+
     let r = parseInt($('#reinf-list').val());
     if (r > 5) { r = 5 }
 
@@ -176,7 +194,7 @@ function handleUnique() {
 }
 
 function handleArms() {
-    toggleElements(['#handle-list', '#handle-label', '#crank-list', '#crank-label', '#reinf-list', '#reinf-label'], false);
+    toggleElements(['#handle-list', '#handle-label', '#crank-list', '#crank-label', '#reinf-list', '#reinf-label', '#s_table'], false);
     clearTable()
 
     for (arm in arms) {

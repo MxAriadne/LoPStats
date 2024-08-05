@@ -24,5 +24,3 @@ Q
 data/arms.js,9/5/95c242ae7442aedd7da56a30fc8734800ea57bdf
 <
 data/data.js,c/5/c5f27c465c48ac53ba1e1962a07a23afca4c30ca
-7
-temp.js,9/c/9c46d60fca5120db667d49635d8f7d8efacacc0d

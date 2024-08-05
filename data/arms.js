@@ -29,7 +29,7 @@ const arms = {
     fulminis: {
         name: "Fulminis",
         physATK: 0,
-        elemATK: [150, 0, 0],
+        elemATK: [157, 0, 0],
         scaling: [3, 1, 3]
     },
     left_arm_of_steel: {

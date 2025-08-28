@@ -154,7 +154,7 @@ function handleStandard() {
                 '</tr>');
         }
         $('#table').append("</tbody>")
-        Sortable.init()
+        //Sortable.init()
     }
 }
 
@@ -189,7 +189,7 @@ function handleUnique() {
                 '</tr>');
         }
         $('#table').append("</tbody>")
-        Sortable.init()
+        //Sortable.init()
     }
 }
 
@@ -221,7 +221,7 @@ function handleArms() {
                 '</tr>');
         }
         $('#table').append("</tbody>")
-        Sortable.init()
+        //Sortable.init()
     }
 }
 

@@ -203,5 +203,47 @@ const handles = {
         heavy_mult: 1.3,
         ch_heavy_mult: 2.25,
         scaling: [1, 3, 0]
+    },
+    arches_guardian_handle: {
+        name: "Arches Guardian Handle",
+        light_mult: 1,
+        heavy_mult: 1.35,
+        ch_heavy_mult: 2.7,
+        scaling: [1, 2, 3]
+    },
+    la_vendetta_handle: {
+        name: "La Vendetta Handle",
+        light_mult: 1.3,
+        heavy_mult: 1.5,
+        ch_heavy_mult: 2.6,
+        scaling: [3, 2, 0]
+    },
+    lorenzini_bolt_handle: {
+        name: "Lorenzini Bolt Handle",
+        light_mult: 1.2,
+        heavy_mult: 1.5,
+        ch_heavy_mult: 2.45,
+        scaling: [2, 3, 0]
+    },
+    maniacs_pinwheel_handle: {
+        name: "Maniac's Pinwheel Handle",
+        light_mult: 1.5,
+        heavy_mult: 1.5,
+        ch_heavy_mult: 2.5,
+        scaling: [4, 1, 0]
+    },
+    puppet_of_the_future_welder_handle: {
+        name: "Puppet of the Future Welder Handle",
+        light_mult: 0.75,
+        heavy_mult: 2,
+        ch_heavy_mult: 3.15,
+        scaling: [2, 1, 3]
+    },
+    silent_evangelists_mace_handle: {
+        name: "Silent Evangelist's Mace Handle",
+        light_mult: 1.2,
+        heavy_mult: 1.65,
+        ch_heavy_mult: 3.05,
+        scaling: [3, 2, 0]
     }
 };

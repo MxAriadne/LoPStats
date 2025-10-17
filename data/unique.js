@@ -60,4 +60,24 @@ const unique = {
         physATK: 124,
         scaling: [2, 3, 0],
     },
+    deaths_talons: {
+        name: "Death's Talons",
+        physATK: 109,
+        scaling: [3, 4, 0],
+    },
+    monads_rose_sword: {
+        name: "Monad's Rose Sword",
+        physATK: 124,
+        scaling: [3, 3, 0],
+    },
+    pale_knight: {
+        name: "Pale Knight",
+        physATK: 124,
+        scaling: [3, 2, 0],
+    },
+    royal_horn_bow: {
+        name: "Royal Hornbow",
+        physATK: 124,
+        scaling: [1, 3, 0],
+    }
 };

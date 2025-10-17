@@ -149,5 +149,35 @@ const blades = {
         name: "Wintry Rapier Blade",
         physATK: 98,
         elemATK: [0, 0, 0],
+    },
+    arches_guardian_blade: {
+        name: "Arches Guardian Blade",
+        physATK: 122,
+        elemATK: [0, 0, 0],
+    },
+    la_vendetta_head: {
+        name: "La Vendetta Head",
+        physATK: 132,
+        elemATK: [0, 0, 0],
+    },
+    lorenzini_bolt: {
+        name: "Lorenzini Bolt Blade",
+        physATK: 123,
+        elemATK: [0, 0, 0],
+    },
+    maniacs_pinwheel_blade: {
+        name: "Maniac's Pinwheel Blade",
+        physATK: 121,
+        elemATK: [0, 0, 0],
+    },
+    puppet_of_the_future_welder: {
+        name: "Puppet of the Future Welder Blade",
+        physATK: 126,
+        elemATK: [0, 0, 0],
+    },
+    silent_evangelists_mace_head: {
+        name: "Silent Evangelist's Mace Head",
+        physATK: 125,
+        elemATK: [0, 0, 0],
     }
 };

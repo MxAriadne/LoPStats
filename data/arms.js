@@ -49,5 +49,17 @@ const arms = {
         physATK: 69,
         elemATK: [0, 0, 0],
         scaling: [2, 4, 1]
+    },
+    cataclysm: {
+        name: "Cataclysm",
+        physATK: 110,
+        elemATK: [0, 0, 0],
+        scaling: [4, 2, 0]
+    },
+    icarus: {
+        name: "Icarus",
+        physATK: 100,
+        elemATK: [0, 0, 0],
+        scaling: [3, 3, 0]
     }
 }
